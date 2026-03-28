@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="pieChart" width="300" height="300"></canvas>
+
+<script>
+var c = document.getElementById("pieChart");
+var ctx = c.getContext("2d");
+
+var centerX = 150;
+var centerY = 150;
+var radius = 100;
+
+// Function to draw slice + label
+function drawSlice(start, end, color, label) {
+    // Draw slice
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.arc(centerX, centerY, radius, start, end);
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    // Calculate middle angle
+    var midAngle = (start + end) / 2;
+
+    // Position for text (inside slice)
+    var x = centerX + Math.cos(midAngle) * (radius / 1.5);
+    var y = centerY + Math.sin(midAngle) * (radius / 1.5);
+
+    // Draw text
+    ctx.fillStyle = "black";
+    ctx.font = "14px Arial";
+    ctx.fillText(label, x - 30, y);
+}
+
+
+drawSlice(0, Math.PI, "green", "Green 50%");
+
+drawSlice(Math.PI, Math.PI * 1.5, "red", "Red 40%");
+
+drawSlice(Math.PI * 1.5, Math.PI * 2, "blue", "Blue 25%");
+
+</script>
+
+</body>
+</html>
